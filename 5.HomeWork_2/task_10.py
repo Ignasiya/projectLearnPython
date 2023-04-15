@@ -7,10 +7,9 @@
 
 coins = input('Введите монетки, где 0 - орел и 1 - решка: ')
 
-eagle = 0
-tail = 0
-i = 0
+eagle = tail = 0
 
+i = 0
 while i < len(coins):
     if coins[i] == '0':
         eagle += 1

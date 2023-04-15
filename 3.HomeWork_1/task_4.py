@@ -9,6 +9,7 @@
 60 -> 10 40 10
 '''
 numS = int(input('Введите количество журавликов S = '))
+
 result = (numS + 1) // 3
 ost = numS - result * 3
 

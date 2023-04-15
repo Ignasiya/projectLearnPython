@@ -7,7 +7,7 @@
 num = int(input('Введите любое натуральное число: '))
 tempNum = num
 sum = 0
-while tempNum > 0:
+while tempNum: # Как выйдет в ноль или Empty станет false
     sum += tempNum % 10
     tempNum //= 10
 print(f'Cумма цифр чила {num} -> {sum}')
