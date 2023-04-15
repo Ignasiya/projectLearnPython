@@ -1,8 +1,8 @@
 dictionary = {}
 dictionary[895] = 98998
-print(dictionary)
+# print(dictionary)
 
-del dictionary[895]
+# del dictionary[895]
 for item in dictionary:
     print(item) # Вывод ключей
     print('{}: {}'.format(item, dictionary[item]))
