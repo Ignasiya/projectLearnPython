@@ -9,6 +9,8 @@ num_b = numbers[1]
 def PowNumber(a, b):
     if b == 0:
         return 1
+    elif b < 0:
+        return 1 / (PowNumber(a, -b - 1) * a)
     else:
         return PowNumber(a, b - 1) * a
 
