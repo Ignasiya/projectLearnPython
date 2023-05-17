@@ -23,4 +23,4 @@ print(q)
 
 a = {1, 8, 6}
 
-b = frozenset(a) # не мождем менять
+b = frozenset(a) # не можем менять
