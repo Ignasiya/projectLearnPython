@@ -15,6 +15,8 @@ def find_rhythm_verses(poem):
         count = 0
         for char in 'уеыаоёэяию':
             count += verse.count(char)
+        if count == 0: 
+            return False
         quantity.append(count)
     return len(set(quantity)) == 1
 
