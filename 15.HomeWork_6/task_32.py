@@ -19,3 +19,9 @@ print(*list_1)
 for i in range(size):
     if min <= list_1[i] <= max:
         print(i, end = ' ')
+
+# nums_list = [int(i) for i in input().split()]
+# num_min = int(input())
+# num_max = int(input())
+
+# print([ind for ind, val in enumerate(nums_list) if num_min <= val <= num_max])
