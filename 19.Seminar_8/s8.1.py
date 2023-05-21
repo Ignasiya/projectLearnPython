@@ -26,17 +26,17 @@ def read_records():
 
 def show_all():
     if all_data:
-        print(*all_data, sep="\n")
+        print(*all_data, sep="\n", end="\n")
     else:
         print("Empty base!\n")
+    print()
 
 def add_data(last_id):
-    global all_data
-    
     print('Enter "LAST NAME" "FIRST NAME" "MIDDLE NAME" "PHONE NUMBER"')
     print('To exit, enter "EXIT":')
     temp_data = []
     work = True
+    last_id += 1
     while work:
         enter = input()
         if enter.upper() == 'EXIT':
@@ -49,19 +49,146 @@ def add_data(last_id):
     
     if temp_data:
         with open(file_base, 'a', encoding="utf-8") as f:
-            f.write(*temp_data)
+            print(*temp_data, sep='\n', end='\n', file=f)
 
 def search():
-    pass
+    enter = input('Enter the search element: ').upper()
+    if enter == '':
+        print("Empty search element!\n")
+    elif all_data:
+        print(*list(filter(lambda x: x.upper().find(enter) >= 0, all_data)), sep='\n', end='\n')
+    else:
+        print("Empty base or search element!\n")
+    print()
 
 def change_data():
-    pass
+    global all_data
+
+    enter = input('Enter the line ID: ')
+    if enter.isdigit():
+        if all_data:            
+            work = False
+            for i in range(len(all_data)):
+                if enter == all_data[i][0]:
+                    enter = str(i)
+                    work = True
+                    break
+            else:
+                print("There is no such line\n")
+            while work:
+                change_string = all_data[int(enter)]
+                print("Change string:", change_string)
+                answer = input('Do you want to make changes?:\n'
+                                '1. Yes\n'
+                                '2. No\n')
+                match answer:
+                    case "1":
+                        new_enter = input('Enter new "LAST NAME" "FIRST NAME" "MIDDLE NAME" "PHONE NUMBER":\n')
+                        if len(new_enter.split()) != 4:
+                            print('Entered incorrectly. Check the entered data\n')
+                        else:
+                            all_data[int(enter)] = (all_data[int(enter)][0] + ' ' + new_enter)
+                            work = False
+                    case "2":
+                        work = False
+                    case _:
+                        print("Try again!\n")
+            
+            with open(file_base, 'w', encoding="utf-8") as f:
+                print(*all_data, sep='\n', end='\n', file=f)
+        else:
+            print("Empty base!\n")
+    else:
+        print("Incorrect ID\n")
 
 def delete():
-    pass
+    global all_data
 
-def main_export_import():
-    pass
+    enter = input('Enter the ID of the row to delete: ')
+    if enter.isdigit():
+        if all_data:            
+            work = False
+            for i in range(len(all_data)):
+                if enter == all_data[i][0]:
+                    enter = str(i)
+                    work = True
+                    break
+            else:
+                print("There is no such line\n")
+            while work:
+                delete_string = all_data[int(enter)]
+                print("Change string:", delete_string)
+                answer = input('Do you want to delete this line?:\n'
+                                '1. Yes\n'
+                                '2. No\n')
+                match answer:
+                    case "1":
+                        del all_data[int(enter)]
+                        work = False
+                    case "2":
+                        work = False
+                    case _:
+                        print("Try again!\n")
+                
+            with open(file_base, 'w', encoding="utf-8") as f:
+                print(*all_data, sep='\n', end='\n', file=f)
+        else:
+            print("Empty base!\n")
+    else:
+        print("Incorrect ID\n")    
+
+def main_export_import(last_id):
+    work = True
+    while work:
+        answer = input('1. Export\n'
+                        '2. Import\n')
+        match answer:
+            case "1":
+                start_id = input('Enter the initial ID for export: ')
+                for i in range(len(all_data)):
+                    if start_id == all_data[i][0]:
+                        start_id = i
+                        break
+                else:
+                    print("There is no such ID\n")
+                    return
+                
+                end_id = input('Enter the destination ID for export: ')
+                for i in range(len(all_data)):
+                    if end_id == all_data[i][0]:
+                        end_id = i
+                        break
+                else:
+                    print("There is no such ID\n")
+                    return
+                new_name_file = input('Enter the name of the new file: ')
+                with open(new_name_file + '.txt', 'w', encoding="utf-8") as f:
+                    for i in range(start_id, end_id + 1):
+                        print(all_data[i], sep='\n', end='\n', file=f)
+                work = False
+            case "2":
+                name_file = input('Enter the name of the file to import: ').strip()
+                if not path.exists(name_file + '.txt'):
+                    print("There is no such file\n")                    
+                else:
+                    with open(name_file + '.txt', 'r', encoding="utf-8") as new_f:
+                        temp_data = []
+                        last_id += 1
+                        for i in new_f:
+                            if len(i.split()) != 4:
+                                print('The string must contain 4 elements (without ID)\n')
+                                return
+                            else:
+                                temp_data.append(str(last_id) + ' ' +i.strip())
+                                last_id += 1
+                    if temp_data:
+                        with open(file_base, 'a', encoding="utf-8") as f:
+                            print(*temp_data, sep='\n', end='\n', file=f)
+                    else:
+                        print("Empty base!\n")                        
+                work = False
+            case _:
+                print("Try again!\n")
 
 def main_menu():
     work = True
@@ -79,15 +206,15 @@ def main_menu():
             case "1":
                 show_all()
             case "2":
-                pass
+                add_data(last_id)
             case "3":
-                pass
+                search()
             case "4":
-                pass
+                change_data()
             case "5":
-                pass
+                delete()
             case "6":
-                pass
+                main_export_import(last_id)
             case "7":
                 work = False
             case _:
