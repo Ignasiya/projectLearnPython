@@ -36,7 +36,6 @@ def add_data(last_id):
     print('To exit, enter "EXIT":')
     temp_data = []
     work = True
-    last_id += 1
     while work:
         enter = input()
         if enter.upper() == 'EXIT':
