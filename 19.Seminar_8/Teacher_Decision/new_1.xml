@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<root>
+	<n1>
+		<id>1</id>
+		<name>Кирилл</name>
+		<surname>Цинов</surname>
+		<phone>12345678</phone>
+		<description>автосервис</description>
+	</n1>
+	<n2>
+		<id>2</id>
+		<name>Кира</name>
+		<surname>Цинов</surname>
+		<phone>12345678</phone>
+		<description>работа</description>
+	</n2>
+	<n3>
+		<id>3</id>
+		<name>Роман</name>
+		<surname>Хорошев</surname>
+		<phone>23456789</phone>
+		<description>институт</description>
+	</n3>
+	<n4>
+		<id>4</id>
+		<name>Василий</name>
+		<surname>Степанов</surname>
+		<phone>12345678</phone>
+		<description>велосипеды</description>
+	</n4>
+	<n5>
+		<id>5</id>
+		<name>Василий</name>
+		<surname>Пурков</surname>
+		<phone>2345678</phone>
+		<description>лыжи</description>
+	</n5>
+</root>
